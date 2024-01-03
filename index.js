@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const productsRouter = require("./routes/products.routes");
+const connectDB = require("./mongodb/connect");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -12,6 +13,7 @@ app.use("/api/v1/products", productsRouter);
 
 const startServer = async () => {
   try {
+    connectDB(process.env.MONGODB_URL);
     app.listen(PORT, () => console.log(`Servet listening at PORT ${PORT}`));
   } catch (error) {
     console.log(error);
