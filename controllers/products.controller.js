@@ -1,7 +1,13 @@
 const ProductsModel = require("../mongodb/models/products");
 
 const getAllProducts = async (req, res) => {
-  res.send("Hello World");
+  try {
+    const products = await ProductsModel.find({});
+    console.log({ products });
+    res.status(201).send(products);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 const getProductById = async (req, res) => {
