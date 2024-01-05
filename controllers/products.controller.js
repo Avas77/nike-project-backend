@@ -11,7 +11,16 @@ const getAllProducts = async (req, res) => {
 };
 
 const getProductById = async (req, res) => {
-  res.send("Hello World");
+  const _id = req.params.id;
+  try {
+    const product = await ProductsModel.findById(_id);
+    if (!product) {
+      res.status(404).send(`Product with ${_id} not found`);
+    }
+    res.status(200).send(product);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 const addProducts = async (req, res) => {
