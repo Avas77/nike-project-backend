@@ -1,3 +1,4 @@
+const ProductsModel = require("../mongodb/models/products");
 const userModel = require("../mongodb/models/user");
 
 const createUser = async (req, res) => {
@@ -30,7 +31,23 @@ const matchUser = async (req, res) => {
   }
 };
 
+const bookProduct = async (req, res) => {
+  const email = req.body.email;
+  const productId = req.params.id;
+
+  try {
+    const user = await userModel.findOne({ email });
+    const product = await await ProductsModel.findById(productId);
+    product.orderBy = user._id;
+    await product.save();
+    res.status(201).send("Order Successfull");
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 module.exports = {
   createUser,
   matchUser,
+  bookProduct,
 };
