@@ -21,6 +21,15 @@ const productsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  singleImg: {
+    type: String,
+    required: true,
+  },
+  orderBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+    ref: "userModel",
+  },
 });
 
 module.exports = productsSchema;
