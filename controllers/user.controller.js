@@ -46,8 +46,27 @@ const bookProduct = async (req, res) => {
   }
 };
 
+const viewOrder = async (req, res) => {
+  const email = req.body.email;
+
+  try {
+    const user = await userModel.findOne({ email });
+    const match = {
+      orderBy: user._id,
+    };
+    await user.populate({
+      path: "products",
+      match,
+    });
+    res.send(user.products);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 module.exports = {
   createUser,
   matchUser,
   bookProduct,
+  viewOrder,
 };

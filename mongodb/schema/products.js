@@ -28,7 +28,7 @@ const productsSchema = new mongoose.Schema({
   orderBy: {
     type: mongoose.Schema.Types.ObjectId,
     required: false,
-    ref: "userModel",
+    ref: "User",
   },
 });
 
