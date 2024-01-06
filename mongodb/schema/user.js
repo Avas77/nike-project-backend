@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.virtual("products", {
-  ref: "ProductsModel",
+  ref: "Products",
   localField: "_id",
   foreignField: "orderBy",
 });
